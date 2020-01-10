@@ -39,6 +39,18 @@ func dataSourceAwsVpcPeeringConnection() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"cidr_block_set": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"ipv6_cidr_block_set": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 			"region": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -58,6 +70,18 @@ func dataSourceAwsVpcPeeringConnection() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
+			},
+			"peer_cidr_block_set": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"peer_ipv6_cidr_block_set": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"peer_region": {
 				Type:     schema.TypeString,
@@ -132,10 +156,14 @@ func dataSourceAwsVpcPeeringConnectionRead(d *schema.ResourceData, meta interfac
 	d.Set("vpc_id", pcx.RequesterVpcInfo.VpcId)
 	d.Set("owner_id", pcx.RequesterVpcInfo.OwnerId)
 	d.Set("cidr_block", pcx.RequesterVpcInfo.CidrBlock)
+	d.Set("cidr_block_set", pcx.RequesterVpcInfo.CidrBlockSet)
+	d.Set("ipv6_cidr_block_set", pcx.RequesterVpcInfo.CidrBlockSet)
 	d.Set("region", pcx.RequesterVpcInfo.Region)
 	d.Set("peer_vpc_id", pcx.AccepterVpcInfo.VpcId)
 	d.Set("peer_owner_id", pcx.AccepterVpcInfo.OwnerId)
 	d.Set("peer_cidr_block", pcx.AccepterVpcInfo.CidrBlock)
+	d.Set("peer_cidr_block_set", pcx.AccepterVpcInfo.CidrBlockSet)
+	d.Set("peer_ipv6_cidr_block_set", pcx.AccepterVpcInfo.Ipv6CidrBlockSet)
 	d.Set("peer_region", pcx.AccepterVpcInfo.Region)
 	d.Set("tags", tagsToMap(pcx.Tags))
 

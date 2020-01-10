@@ -34,6 +34,7 @@ func TestAccDataSourceAwsVpcPeeringConnection_basic(t *testing.T) {
 					testAccDataSourceAwsVpcPeeringConnectionCheck("data.aws_vpc_peering_connection.test_by_owner_ids"),
 					resource.TestCheckResourceAttrSet("data.aws_vpc_peering_connection.test_by_owner_ids", "id"),
 					resource.TestCheckResourceAttrSet("data.aws_vpc_peering_connection.test_by_owner_ids", "cidr_block"),
+					resource.TestCheckResourceAttrSet("data.aws_vpc_peering_connection.test_by_owner_ids", "cidr_block_set"),
 				),
 				ExpectNonEmptyPlan: true,
 			},
